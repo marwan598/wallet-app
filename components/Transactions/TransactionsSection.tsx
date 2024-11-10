@@ -35,7 +35,7 @@ const TransactionsSection: FunctionComponent<
       <TransactionRow style={styles.transactionHeader}>
         <RegularText textStyles={styles.headerTile}>Transactions</RegularText>
         <SmallText textStyles={styles.headerSubTile}>Recent</SmallText>
-        <Icon name="caret-down" size={13} color={colors.grayDark} />;
+        <Icon name="caret-down" size={13} color={colors.grayDark} />
       </TransactionRow>
       <TransactionList
         data={props.data}

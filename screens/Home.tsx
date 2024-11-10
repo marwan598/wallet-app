@@ -7,6 +7,8 @@ import CardSection from '../components/Cards/CardSection';
 import TransactionsSection from '../components/Transactions/TransactionsSection';
 import {cardData} from '../data/cardData';
 import {transactionData} from '../data/transactionData';
+import SendMoneySection from '../components/SendMoney/SendMoneySection';
+import {sendMoneyData} from '../data/sendMoneyData';
 
 const HomeContainer = styled(Container)`
   background-color: ${colors.grayLight};
@@ -19,6 +21,7 @@ const Home: FunctionComponent = () => {
       <StatusBar barStyle="light-content" />
       <CardSection data={cardData} />
       <TransactionsSection data={transactionData} />
+      <SendMoneySection data={sendMoneyData} />
     </HomeContainer>
   );
 };
