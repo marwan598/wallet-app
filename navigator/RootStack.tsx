@@ -1,6 +1,8 @@
 import React, {FunctionComponent} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import Welcome from '../screens/Welcome';
 import Home from '../screens/Home';
 import {colors} from '../components/colors';
@@ -8,26 +10,33 @@ import Greeting from '../components/Header/Greeting';
 import Profile from '../components/Header/Profile';
 import Avi from '../assets/avi/avatar.png';
 import {StyleSheet} from 'react-native';
+import {CardProps} from '../components/Cards/types';
+import Balance from '../screens/Balance';
 
 export type RootStackParamList = {
   Welcome: undefined;
   Home: undefined;
+  Balance: CardProps;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
+const renderGreeting = (props: any) => (
+  <Greeting mainText="Hey Moro!" subText="Welcome Back!" {...props} />
+);
+
+const renderProfile = () => (
+  <Profile img={Avi} imgContainerStyle={styles.imgContainerStyle} />
+);
+
+const headerBackImage = (props: any) => (
+  <Icon {...props} name="chevron-back" size={25} color={colors.secondary} />
+);
+
 const RootStack: FunctionComponent = () => {
-  const renderGreeting = (props: any) => (
-    <Greeting mainText="Hey Moro!" subText="Welcome Back!" {...props} />
-  );
-
-  const renderProfile = () => (
-    <Profile img={Avi} imgContainerStyle={styles.imgContainerStyle} />
-  );
-
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Balance"
         screenOptions={{
           headerStyle: {
             backgroundColor: colors.grayLight,
@@ -58,6 +67,16 @@ const RootStack: FunctionComponent = () => {
             headerTitle: renderGreeting,
             headerLeft: () => null,
           }}
+        />
+        <Stack.Screen
+          name="Balance"
+          component={Balance}
+          options={({route}) => ({
+            headerTitle: route?.params?.alias,
+            headerTitleAlign: 'center',
+            headerBackImage: headerBackImage,
+            headerLeftContainerStyle: {paddingLeft: 0},
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
